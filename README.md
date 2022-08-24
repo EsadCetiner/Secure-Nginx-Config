@@ -10,11 +10,12 @@ This Configuration files requires the nginx-full and nginx-common package
 Installation
 clone the repo
 ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
+
 Remove your Nginx conf file
 ``sudo rm /etc/nginx/nginx.conf``
+
 Replace Nginx conf file with new one
 ``sudo mv ~/Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
-
 
 To hide Nginx error pages add this to your virtual host file
 
