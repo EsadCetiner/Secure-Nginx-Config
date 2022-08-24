@@ -4,7 +4,9 @@ I've made some changes based on my personal use case and added some additional e
 Feel free to use this however you like
 
 This Configuration files requires the nginx-full and nginx-common package 
+
 ``sudo apt install nginx-full nginx-common``
+
 To hide Nginx error pages add this to your virtual host file
 
 include /etc/nginx/hide-error-pages.conf;
