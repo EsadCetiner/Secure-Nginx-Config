@@ -32,6 +32,10 @@ To hide Nginx error pages add this to your virtual host file
 
 ``include /etc/nginx/hide-error-pages.conf;``
 
+``and move the error pages to /var/www/
+
+``sudo mv Secure-Nginx-Config/error_pages /var/www/``
+
 To add some basic security headers add this to your virtual hosts file
 
 ``include /etc/nginx/configurations/security-headers.conf;``
