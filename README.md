@@ -22,7 +22,7 @@ Replace Nginx conf file with new one
 
 Move Configurations file to nginx directory
 
-``sudo mv Secure-Nginx-Config/Configurations /etc/nginx/``
+``sudo mv Secure-Nginx-Config/configurations /etc/nginx/``
 
 Reload nginx to apply your new configuration
 
@@ -32,4 +32,6 @@ To hide Nginx error pages add this to your virtual host file
 
 ``include /etc/nginx/hide-error-pages.conf;``
 
-To include some basic security headers add this to your virtual hosts file
+To add some basic security headers add this to your virtual hosts file
+
+``include /etc/nginx/configurations/security-headers.conf;``
