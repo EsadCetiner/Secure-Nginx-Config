@@ -5,7 +5,7 @@ Feel free to use this however you like
 
 This Configuration files requires the nginx-full and nginx-common package 
 
-``sudo apt install nginx-full nginx-common``
+``sudo apt install nginx nginx-extras``
 
 Installation
 clone the repo
