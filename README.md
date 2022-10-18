@@ -3,7 +3,7 @@ I've made some changes based on my personal use case and added some additional e
 
 Feel free to use this however you like
 
-This Configuration files requires the nginx-full and nginx-common package 
+This Configuration files requires the nginx and nginx-extras package 
 
 ``sudo apt install nginx nginx-extras``
 
