@@ -1,41 +1,28 @@
-This is a modified version of https://github.com/stylersnico/nginx-secure-config
-I've made some changes based on my personal use case and added some additional enhancements, such as being able to hide Nginx.
+# Fast and Secure Nginx Configuration Template - By Esad Cetiner
+The goal of this project is to provide a fast and secure by default Nginx template, along with additional code snippets found inside ``configurations`` designed to help further improve performance/security for more specific use cases.
 
-Feel free to use this however you like
+Feel free to use this however you like!
 
-This Configuration files requires the nginx and nginx-extras package 
+## How to install
+1. You'll need to make sure that the ``nginx-extras`` package is installed, for Ubuntu/Debian this is ``sudo apt install nginx-extras``.
+2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
+3. Remove the default nginx.conf file ``sudo rm /etc/nginx/nginx.conf``
+4. Replace it with the one from this repository ``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
+5. Move code snippets to nginx folder ``sudo mv Secure-Nginx-Config/configurations /etc/nginx/``
+6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
 
-``sudo apt install nginx nginx-extras``
+### Hiding Nginx
+To hide Nginx include this code ``include /etc/nginx/configurations/hide-nginx.conf;`` inside your server block ``server { }`` to hide Nginx.
 
-Installation
-clone the repo
+### Serve Security Headers
+Most security headers will need to be tuned for each Website, you can serve some basic security headers that should work fine for most people but you may need to fine tune things so it can work for you.
 
-``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
+To server basic security headers add this code ``include /etc/nginx/configurations/security-headers.conf;`` inside your server block ``server { }``
 
-Remove your Nginx conf file
+### HTTPS only mode
+HSTS is a security header that tells browsers to only connect over HTTPS, this helps prevent MITM attacks like SSL stripping.
 
-``sudo rm /etc/nginx/nginx.conf``
+To activate HTTPS only mode add this code ``include /etc/nginx/configurations/ssl.conf;`` inside your server block ``server { }`` then register your domain at https://hstspreload.org, and please make sure you only include this for port 443.
 
-Replace Nginx conf file with new one
-
-``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
-
-Move Configurations file to nginx directory
-
-``sudo mv Secure-Nginx-Config/configurations /etc/nginx/``
-
-Reload nginx to apply your new configuration
-
-``sudo systemctl reload nginx``
-
-To hide Nginx error pages add this to your virtual host file
-
-``include /etc/nginx/hide-error-pages.conf;``
-
-and move the error pages to /var/www/
-
-``sudo mv Secure-Nginx-Config/error_pages /var/www/``
-
-To add some basic security headers add this to your virtual hosts file
-
-``include /etc/nginx/configurations/security-headers.conf;``
+### Fix Nextcloud "CONNECTION CLOSED" Error
+Uploading large files to Nextcloud may cause a "Connection Closed" error, to fix this simply add this code ``include /etc/nginx/configurations/nextcloud_fix.conf;`` to your server block ``server { }``, this will increase the max upload size to 10GB. 
