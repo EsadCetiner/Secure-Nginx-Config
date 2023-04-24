@@ -3,6 +3,10 @@ The goal of this project is to provide a fast and secure by default Nginx templa
 
 Feel free to use this however you like!
 
+## Requirements
+- A certificate with OCSP Stapling
+- This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
+
 ## How to install
 1. You'll need to make sure that the ``nginx-extras`` package is installed, for Ubuntu/Debian this is ``sudo apt install nginx-extras``.
 2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
@@ -10,9 +14,12 @@ Feel free to use this however you like!
 4. Replace it with the one from this repository ``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
 5. Move code snippets to nginx folder ``sudo mv Secure-Nginx-Config/configurations /etc/nginx/``
 6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
+7. Replace ``ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;`` inside ``nginx.conf`` with the path to your certificate file (chain.pem for let's encrypt) 
 
 ### Hiding Nginx
 To hide Nginx include this code ``include /etc/nginx/configurations/hide-nginx.conf;`` inside your server block ``server { }`` to hide Nginx.
+
+Please note that security through obscurity is not a replacement for proper security controls
 
 ### Serve Security Headers
 Most security headers will need to be tuned for each Website, you can serve some basic security headers that should work fine for most people but you may need to fine tune things so it can work for you.
