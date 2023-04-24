@@ -5,6 +5,7 @@ Feel free to use this however you like!
 
 ## Requirements
 - A certificate with OCSP Stapling
+- Nginx more_set_headers module installed
 - This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
 
 ## How to install
