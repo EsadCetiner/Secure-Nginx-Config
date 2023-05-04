@@ -27,6 +27,9 @@ Most security headers will need to be tuned for each Website, you can serve some
 
 To server basic security headers add this code ``include /etc/nginx/configurations/security-headers.conf;`` inside your server block ``server { }``
 
+### Prevent your site from being indexed by Google
+To prevent your website from showing up in google search results add this include ``include /etc/nginx/configurations/no-robots.conf;`` inside your server block ``server { }``, please note that it will take time for your site to disapear from Google Search if it's already been indexed.
+
 ### HTTPS only mode
 HSTS is a security header that tells browsers to only connect over HTTPS, this helps prevent MITM attacks like SSL stripping.
 
