@@ -42,3 +42,8 @@ Uploading large files to Nextcloud may cause a "Connection Closed" error, to fix
 By default, Nginx uses gzip which has inferior compression and uses up more CPU cycles, Brotli can typically improve page load times by 5-10%.
 
 To enable Brotli, make sure you have the brotli module installed https://github.com/google/ngx_brotli and uncomment the load_module for brotli in ``nginx.conf``. Then add an include for the brotli code snippet ``include /etc/nginx/snippets/brotli.conf;`` in your HTTP block ``http { }`` inside ``nginx.conf``.
+
+### Enable 0-RTT
+0-RTT is feature introduced in TLSv1.3 to improve the intial TLS connection, especially if it's combined with HTTP3. This feature is disabled by default since it opens up the risk to replay attacks (See: https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/), you should consider what your performance and security needs are before enabling 0-RTT.
+
+To enable 0-RTT, add an include for the 0-rtt code snippet in your http block ``include /etc/nginx/snippets/0-rtt.conf;``..
