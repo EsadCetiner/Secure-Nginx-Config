@@ -1,7 +1,16 @@
 # Fast and Secure Nginx Configuration Template - By Esad Cetiner
-The goal of this project is to provide a fast and secure by default Nginx template, along with additional code snippets found inside ``snippets`` folder designed to help further improve performance/security for more specific use cases.
+This project's goal is to provide a fast and secure by default Nginx configuration template and encourage secure design that minimizes the chances of misconfigurations and their impacts. Additional code snippets can be found inside the snippets folder which add additional functionality to improve performance/security but aren't enabled by default for various reasons, such as potentially being insecure, not working out of the box, or only being useful for more specific use cases.
 
-Feel free to use this however you like!
+## Features
+- HTTPS redirection
+- DoS mitigation (Will need to be tuned for your use case, but fine out of the box)
+- Brotli Compression (Disabled by default)
+- Disable page indexing
+- 0-RTT (Disabled by default due to potential security concerns)
+- Hide Nginx
+- HSTS HTTPS only mode
+- A+ Score on SSL Labs
+- OCSP Stapling
 
 ## Requirements
 - A certificate with OCSP Stapling
