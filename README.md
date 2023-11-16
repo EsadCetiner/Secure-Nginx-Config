@@ -11,6 +11,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - HSTS HTTPS only mode
 - A+ Score on SSL Labs
 - OCSP Stapling
+- File caching for frequently accessed files
 
 ## Requirements
 - A certificate with OCSP Stapling
