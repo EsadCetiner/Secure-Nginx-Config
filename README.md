@@ -12,6 +12,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - A+ Score on SSL Labs
 - OCSP Stapling
 - File caching for frequently accessed files
+- Prevent access to sensitive files (such as database dumps)
 
 ## Requirements
 - A certificate with OCSP Stapling
@@ -57,3 +58,10 @@ To enable Brotli, make sure you have the brotli module installed https://github.
 0-RTT is a feature introduced in TLSv1.3 to improve the initial TLS connection speed, especially if it's combined with HTTP3. This feature is disabled by default since it opens up the risk of replay attacks (See: https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/), you should consider what your performance and security needs are before enabling 0-RTT.
 
 To enable 0-RTT, add an include for the 0-rtt code snippet in your http block ``include /etc/nginx/snippets/0-rtt.conf;``.
+
+### Protect sensitive files
+You can prevent the access of sensitive files stored in webroot such as htacess, database dumps and configuration files containing secrets. This feature tries to be false positive free but it may have poor coverage as a result.
+
+**WARNING:** Do not store anything sensitive in your webroot if you can help it, this feature is meant to mitigate accidental misconfigurations.
+
+To enable this feature, add an include into your server block ``include /etc/nginx/snippets/protect-sensitive-files.conf;``.
