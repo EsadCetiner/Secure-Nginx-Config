@@ -13,6 +13,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - OCSP Stapling
 - File caching for frequently accessed files
 - Prevent access to sensitive files (such as database dumps)
+- Default empty webroot (Prevents accidentally exposing your entire server's file system to the internet)
 
 ## Requirements
 - A certificate with OCSP Stapling
@@ -27,6 +28,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 5. Move code snippets to nginx folder ``sudo mv Secure-Nginx-Config/snippets /etc/nginx/``
 6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
 7. Replace ``ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;`` inside ``nginx.conf`` with the path to your certificate file (chain.pem for let's encrypt) 
+8. Create an empty webroot to prevent accidential misconfiguration of webroot ``mkdir -p /var/www/empty-webroot/``
 
 ### Hiding Nginx
 To hide Nginx include this code ``include /etc/nginx/snippets/hide-nginx.conf;`` inside your server block ``server { }`` to hide Nginx.
