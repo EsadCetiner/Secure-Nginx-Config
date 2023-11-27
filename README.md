@@ -67,3 +67,6 @@ You can prevent the access of sensitive files stored in webroot such as htacess,
 **WARNING:** Do not store anything sensitive in your webroot if you can help it, this feature is meant to mitigate accidental misconfigurations.
 
 To enable this feature, add an include into your server block ``include /etc/nginx/snippets/protect-sensitive-files.conf;``.
+
+### Additional resources:
+**Yandex Gixy:** Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box. https://github.com/yandex/gixy
