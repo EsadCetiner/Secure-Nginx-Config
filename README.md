@@ -10,6 +10,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - Hide Nginx
 - HSTS HTTPS only mode
 - A+ Score on SSL Labs
+- Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
 - OCSP Stapling
 - File caching for frequently accessed files
 - Prevent access to sensitive files (such as database dumps)
@@ -67,6 +68,13 @@ You can prevent the access of sensitive files stored in webroot such as htacess,
 **WARNING:** Do not store anything sensitive in your webroot if you can help it, this feature is meant to mitigate accidental misconfigurations.
 
 To enable this feature, add an include into your server block ``include /etc/nginx/snippets/protect-sensitive-files.conf;``.
+
+### Prioritize ChaCha20 for clients that don't support AES-NI
+Some clients, in particular mobile clients may not support AES-NI, resulting in AES encryption/decryption being very slow. ChaCha20 is a popular alternative to AES, notably for it's improved performance over AES with clients that don't support AES-NI. Nginx can prioritize ChaCha20 for clients that doesn't support AES-NI, but only if your Nginx packages supports it.
+
+**WARNING:** This is disabled by default since some Nginx packages (including Ubuntu) doesn't support prioritizing ChaCha20.
+
+To enable this feature, uncomment the include within nginx.conf under TLS settings ``include /etc/nginx/snippets/chacha20-non-aes-ni.conf;``.
 
 ### Additional resources:
 **Yandex Gixy:** Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box. https://github.com/yandex/gixy
