@@ -10,6 +10,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - Hide Nginx
 - HSTS HTTPS only mode
 - A+ Score on SSL Labs
+- [Prevent DNS Spoofing](https://blog.zorinaq.com/nginx-resolver-vulns/)
 - Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
 - OCSP Stapling
 - File caching for frequently accessed files
@@ -30,6 +31,12 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
 7. Replace ``ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;`` inside ``nginx.conf`` with the path to your certificate file (chain.pem for let's encrypt) 
 8. Create an empty webroot to prevent accidential misconfiguration of webroot ``mkdir -p /var/www/empty-webroot/``
+
+**NOTE:** To prevent DNS spoofing, the resolver directive within the http block is set to ``127.0.0.53``, your localhost DNS resolver may be located at a different IP address (127.0.0.11 for docker). DNS resolution may fail depending on your environment, monitor your error.log file and set the resolver directive to the correct IP address.
+
+Don't set the resolver directive to a public DNS server, only use the localhost DNS resolver.
+
+See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
 ### Hiding Nginx
 To hide Nginx include this code ``include /etc/nginx/snippets/hide-nginx.conf;`` inside your server block ``server { }`` to hide Nginx.
