@@ -9,6 +9,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - 0-RTT (Disabled by default due to potential security concerns)
 - Hide Nginx
 - HSTS HTTPS only mode
+- Prevent host header spoofing
 - A+ Score on SSL Labs
 - [Prevent DNS Spoofing](https://blog.zorinaq.com/nginx-resolver-vulns/)
 - Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
