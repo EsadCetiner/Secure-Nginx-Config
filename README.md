@@ -31,7 +31,7 @@ Don't set the resolver directive to a public DNS server, only use the localhost 
 See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
 ## How to install
-1. At a bare minimum, the nginx package and http-headers-more-filter should be installed, these can be installed by using this command: ``apt install nginx libnginx-mod-http-headers-more-filter``
+1. At a bare minimum, the nginx package and http-headers-more-filter should be installed, these can be installed by using this command: ``apt install nginx libnginx-mod-http-headers-more-filter ssl-cert``
 2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
 3. Remove the default nginx.conf file ``sudo rm /etc/nginx/nginx.conf``
 4. Replace it with the one from this repository ``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
