@@ -23,7 +23,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
 
 ## How to install
-1. You'll need to make sure that the ``nginx-extras`` package is installed, for Ubuntu/Debian this is ``sudo apt install nginx-extras``.
+1. At a bare minimum, the nginx package and http-headers-more-filter should be installed, these can be installed by using this command: ``apt install nginx libnginx-mod-http-headers-more-filter``
 2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
 3. Remove the default nginx.conf file ``sudo rm /etc/nginx/nginx.conf``
 4. Replace it with the one from this repository ``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
@@ -31,6 +31,15 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
 7. Replace ``ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;`` inside ``nginx.conf`` with the path to your certificate file (chain.pem for let's encrypt) 
 8. Create an empty webroot to prevent accidential misconfiguration of webroot ``mkdir -p /var/www/empty-webroot/``
+
+### Brotli (Brotli is not included in Ubuntu):
+``sudo apt install libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static``
+
+### CrowdSec Nginx Bouncer (Lua is not included in Ubuntu 22.04 and newer)
+To install the CrowdSec Nginx Bouncer, follow the official [CrowdSec Docs](https://docs.crowdsec.net/u/bouncers/nginx) then uncomment the lua modules in nginx.conf.
+
+### ModSecurity:
+Most Linux distro's include an outdated version of ModSecurity, [use this repository](https://modsecurity.digitalwave.hu/) for the latest ModSecurity packages. Then uncomment the ModSecurity modules in nginx.conf.
 
 **NOTE:** To prevent DNS spoofing, the resolver directive within the http block is set to ``127.0.0.53``, your localhost DNS resolver may be located at a different IP address (127.0.0.11 for docker). DNS resolution may fail depending on your environment, monitor your error.log file and set the resolver directive to the correct IP address.
 
@@ -83,5 +92,5 @@ Some clients, in particular mobile clients may not support AES-NI, resulting in 
 
 To enable this feature, uncomment the include within nginx.conf under TLS settings ``include /etc/nginx/snippets/chacha20-non-aes-ni.conf;``.
 
-### Additional resources:
+## Additional resources:
 **Yandex Gixy:** Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box. https://github.com/yandex/gixy
