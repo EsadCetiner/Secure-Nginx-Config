@@ -22,6 +22,14 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - Nginx more_set_headers module installed
 - This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
 
+## Before you install
+
+To prevent DNS spoofing, the resolver directive within the http block is set to ``127.0.0.53``, your localhost DNS resolver may be located at a different IP address (127.0.0.11 for docker). DNS resolution may fail depending on your environment, monitor your error.log file and set the resolver directive to the correct IP address.
+
+Don't set the resolver directive to a public DNS server, only use the localhost DNS resolver.
+
+See: https://blog.zorinaq.com/nginx-resolver-vulns/
+
 ## How to install
 1. At a bare minimum, the nginx package and http-headers-more-filter should be installed, these can be installed by using this command: ``apt install nginx libnginx-mod-http-headers-more-filter``
 2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
@@ -40,12 +48,6 @@ To install the CrowdSec Nginx Bouncer, follow the official [CrowdSec Docs](https
 
 ### ModSecurity:
 Most Linux distro's include an outdated version of ModSecurity, [use this repository](https://modsecurity.digitalwave.hu/) for the latest ModSecurity packages. Then uncomment the ModSecurity modules in nginx.conf.
-
-**NOTE:** To prevent DNS spoofing, the resolver directive within the http block is set to ``127.0.0.53``, your localhost DNS resolver may be located at a different IP address (127.0.0.11 for docker). DNS resolution may fail depending on your environment, monitor your error.log file and set the resolver directive to the correct IP address.
-
-Don't set the resolver directive to a public DNS server, only use the localhost DNS resolver.
-
-See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
 ### Hiding Nginx
 To hide Nginx include this code ``include /etc/nginx/snippets/hide-nginx.conf;`` inside your server block ``server { }`` to hide Nginx.
