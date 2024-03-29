@@ -15,6 +15,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
 - OCSP Stapling
 - File caching for frequently accessed files
+- Reduce information leakage
 - Prevent access to sensitive files (such as database dumps)
 - Default empty webroot (Prevents accidentally exposing your entire server's file system to the internet)
 
