@@ -16,7 +16,7 @@ This project's goal is to provide a fast and secure by default Nginx configurati
 - OCSP Stapling
 - File caching for frequently accessed files
 - Reduce information leakage
-- Prevent access to sensitive files (such as database dumps)
+- Prevent access to sensitive files (such as database dumps and dot files)
 - Default empty webroot (Prevents accidentally exposing your entire server's file system to the internet)
 
 ## Requirements
