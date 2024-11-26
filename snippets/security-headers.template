@@ -1,0 +1,44 @@
+# ----------------------------------------------------------------------------------------------
+# Secure Nginx Config
+# Copyright (c) 2022-2024 Esad Cetiner
+#
+# This configuration template is distributed under GPLv2
+# Please see the included LICENSE file for full details
+# ----------------------------------------------------------------------------------------------
+
+# This is an example config on all of the security headers you should add to your application. All options here are
+# at the strictest possible value and is guaranteed to break your website. Your should copy paste these headers into
+# your server block and then allow only exactly what you need. The browser console (Ctrl + Shift + i) is your best friend
+# when troubleshooting issues caused by security headers.
+
+# Once your done tuning these headers, check your work against a website like https://securityheaders.com.
+# It's not always possible to get an A+ with this tool, but it's a good place to check over your work.
+
+# Prevent clickjacking by restricting iFrames
+# See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+more_set_headers "X-Frame-Options : DENY";
+
+# Remove the referer header
+# See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+more_set_headers "Referrer-Policy : no-referrer";
+
+# Disable access to microphone, camera, etc by default
+# There are tons of options here I suggest using this site to create your
+# permission policy header instead of editing this manually.
+# See: https://www.permissionspolicy.com/
+# See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
+more_set_headers "Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()";
+
+# Opt into cross-origin isolated to better protect against side channel attacks (Such as Spectre and Meltdown) 
+# See: https://scotthelme.co.uk/coop-and-coep/
+more_set_headers "Cross-Origin-Embedder-Policy : require-corp";
+more_set_headers "Cross-Origin-Opener-Policy : same-origin";
+more_set_headers "Cross-Origin-Resource-Policy : same-origin";
+
+# CSP is an powerful header for preventing XSS attacks, iFrames and in general preventing unauthorized resources from loading.
+# There are a ton of options here and a ton of values here, it's recommened to familiarize yourself with many of the options
+# available within the CSP header.
+# See: https://content-security-policy.com/
+# WARNING: Some applications set their own CSP header, in this case you should not override it and let the application handle it.
+more_set_headers "Content-Security-Policy : default-src 'none'; script-src 'none'; style-src 'none; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; child-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests";
+

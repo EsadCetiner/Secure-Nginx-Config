@@ -17,6 +17,7 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 - File caching for frequently accessed files
 - Restrict access to sensitive files
 - Default empty webroot (Prevents accidentally exposing your entire server's file system to the internet)
+- Security header template (Get a higher score in https://securityheaders.com)
 
 ## Requirements
 - A certificate with OCSP Stapling

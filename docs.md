@@ -20,9 +20,9 @@ To activate this feature, add the following code within your NGINX server block 
 
 NOTE: A dedicated attacker will likely be able to fingerprint your web server. This will not protect you from an vulnerability in NGINX but it will annoy an attacker.
 
-## Serve Security Headers
+## Security header template
 
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/security-headers.conf;``.
+Security headers need to be tailored for your environment as it's impossible to create an perfect security header that works for everybody. A template for security header along with instructions are provided [in this example snippet](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/security-headers.template).
 
 ## Prevent your site from being indexed by Search Engines
 
