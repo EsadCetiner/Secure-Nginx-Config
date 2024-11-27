@@ -26,7 +26,7 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 
 ## Before you install
 
-To prevent DNS spoofing, the resolver directive within the http block is set to ``127.0.0.53``, your localhost DNS resolver may be located at a different IP address (127.0.0.11 for docker). DNS resolution may fail depending on your environment, monitor your error.log file and set the resolver directive to the correct IP address.
+To prevent DNS spoofing, the resolver directive within the http block is set to use an localhost DNS stub resolver (which is 127.0.0.53 for most users, 127.0.0.11 for docker). DNS resolution will fail if your DNS stub resolver is not at 127.0.0.53, monitor your error.log file and update the `resolver` directive to use the correct IP address if your having issues.
 
 Don't set the resolver directive to a public DNS server, only use the localhost DNS resolver.
 

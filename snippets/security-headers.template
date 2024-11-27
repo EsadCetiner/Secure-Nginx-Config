@@ -16,9 +16,11 @@
 
 # Prevent clickjacking by restricting iFrames
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+# CIS NGINX 5.3.1 v2.1.0
 more_set_headers "X-Frame-Options : DENY";
 
 # Remove the referer header
+# CIS NGINX 5.3.4 v2.1.0
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
 more_set_headers "Referrer-Policy : no-referrer";
 
@@ -38,6 +40,7 @@ more_set_headers "Cross-Origin-Resource-Policy : same-origin";
 # CSP is an powerful header for preventing XSS attacks, iFrames and in general preventing unauthorized resources from loading.
 # There are a ton of options here and a ton of values here, it's recommened to familiarize yourself with many of the options
 # available within the CSP header.
+# CIS NGINX 5.3.3 v2.1.0
 # See: https://content-security-policy.com/
 # WARNING: Some applications set their own CSP header, in this case you should not override it and let the application handle it.
 more_set_headers "Content-Security-Policy : default-src 'none'; script-src 'none'; style-src 'none; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; child-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests";
