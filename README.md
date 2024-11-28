@@ -33,17 +33,16 @@ Don't set the resolver directive to a public DNS server, only use the localhost 
 See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
 ## How to install
-1. At a bare minimum, the nginx package and http-headers-more-filter should be installed, these can be installed by using this command: ``apt install nginx libnginx-mod-http-headers-more-filter ssl-cert``
-2. Clone this repository ``git clone https://github.com/EsadCetiner/Secure-Nginx-Config/``
-3. Remove the default nginx.conf file ``sudo rm /etc/nginx/nginx.conf``
-4. Replace it with the one from this repository ``sudo mv Secure-Nginx-Config/nginx.conf /etc/nginx/nginx.conf``
-5. Move code snippets to nginx folder ``sudo mv Secure-Nginx-Config/snippets /etc/nginx/``
-6. Move Custom error pages to webroot ``sudo mv Secure-Nginx-Config/error_pages /var/www/``
-7. Replace ``ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;`` inside ``nginx.conf`` with the path to your certificate file (chain.pem for let's encrypt) 
-8. Create an empty webroot to prevent accidential misconfiguration of webroot ``mkdir -p /var/www/empty-webroot/``
 
-## Addional documentation
-Documentation on additional features and code snippets can be [found here](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md).
+1. It's recommended to start with an server without NGINX installed and without any NGINX related configuration.
+2. Then, install the following NGINX packages: `apt install nginx-common libnginx-mod-http-headers-more-filter ssl-cert git` this will install the bare minimum for NGINX to operate and has smallest possible attack surface out of the box. If you need to use additional NGINX modules then you should also install those also.
+3. Clone this repository `git clone https://github.com/esadcetiner/secure-nginx-config/`.
+4. Replace the stock `nginx.conf` file with `cp secure-nginx-config/nginx.conf /etc/nginx/nginx.conf`.
+5. Move snippets to NGINX directory `cp -r secure-nginx-config/snippets/ /etc/nginx/`.
+6. Move error pages to webroot `cp -r secure-nginx-config/error_pages/ /var/www/`.
+7. Create an empty webroot `mkdir -p /var/www/empty-webroot/` (Never place anything in this directory).
+8. Update `ssl_trusted_certificate` directive inside `nginx.conf` with the path to your certificate file for OCSP stapling. Please make sure your certificate supports OCSP stapling.
+9. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
 
 ## Additional resources:
 
