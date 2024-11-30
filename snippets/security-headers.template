@@ -31,7 +31,7 @@ more_set_headers "Referrer-Policy : no-referrer";
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
 more_set_headers "Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()";
 
-# Opt into cross-origin isolated to better protect against side channel attacks (Such as Spectre and Meltdown) 
+# Opt into cross-origin isolated to better protect against side channel attacks (Such as Spectre and Meltdown)
 # See: https://scotthelme.co.uk/coop-and-coep/
 more_set_headers "Cross-Origin-Embedder-Policy : require-corp";
 more_set_headers "Cross-Origin-Opener-Policy : same-origin";
