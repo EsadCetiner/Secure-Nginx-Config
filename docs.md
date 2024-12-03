@@ -10,13 +10,13 @@ NOTE: Brotli is not included in some distro's repositories (Ubuntu 22.04 does no
 
 To activate this feature, Install the `libnginx-mod-http-brotli-filter` and `libnginx-mod-http-brotli-static` packages and uncomment the Brotli include line in `nginx.conf`.
 
-``sudo apt install libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static``
+`sudo apt install libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static`
 
 ## Hiding Nginx
 
 NGINX error pages by default will display NGINX at the bottom of each and every page unless you bring your own custom error pages. Bare bone error pages are provided, if you want pretty error pages then you'll have to make them yourself or find one that you like.
 
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/hide-nginx.conf;``, please make sure bundled error pages are in `/var/www/error_pages/`.
+To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/hide-nginx.conf;`, please make sure bundled error pages are in `/var/www/error_pages/`.
 
 NOTE: A dedicated attacker will likely be able to fingerprint your web server. This will not protect you from an vulnerability in NGINX but it will annoy an attacker.
 
@@ -28,17 +28,13 @@ Security headers need to be tailored for your environment as it's impossible to 
 
 You can use this snippet to prevent your admin panel or similar from being discovereable via Google dorking. Please be aware that this isn't the only way your site can be discovered, there are other methods such as DNS enumeration and [certificate transparency](https://crt.sh/) that can be used. You shouldn't rely on security through obscurity but this can annoy an attacker and stop bots scanning the internet.
 
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/no-robots.conf;``.
+To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/no-robots.conf;`.
 
 ## HTTPS only mode
 
 HTTPs only mode works by setting an security header to tell the client to only connect to this site via HTTPs in the future. It's strongly recommended to register your domain at https://hstspreload.org to ensure new visitors will always connect to your site via HTTPs. Be aware that this can break your site if HTTPs stops working, but it's strongly recommended to enable this feature.
 
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/ssl.conf;``, but only for port 443!
-
-## Fix Nextcloud "CONNECTION CLOSED" Error
-
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/nextcloud_fix.conf;``.
+To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/ssl.conf;`, but only for port 443!
 
 ## Enable 0-RTT
 
@@ -50,7 +46,7 @@ To activate this feature, uncomment the include in `nginx.conf`.
 
 This feature helps prevent common misconfigurations by blocking access to common config files that may contain secrets and hidden dot files.
 
-To activate this feature, add the following code within your NGINX server block ``include /etc/nginx/snippets/protect-sensitive-files.conf;``.
+To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/protect-sensitive-files.conf;`.
 
 ## Prioritize ChaCha20 for clients that don't support AES-NI
 
