@@ -21,6 +21,7 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 
 ## Requirements
 - A certificate with OCSP Stapling
+- ECC certificates are recommended, they are more secure and performant than RSA.
 - Nginx more_set_headers module installed
 - This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
 
@@ -43,6 +44,7 @@ See: https://blog.zorinaq.com/nginx-resolver-vulns/
 7. Create an empty webroot `mkdir -p /var/www/empty-webroot/` (Never place anything in this directory).
 8. Update `ssl_trusted_certificate` directive inside `nginx.conf` with the path to your certificate file for OCSP stapling. Please make sure your certificate supports OCSP stapling.
 9. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
+10. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
 
 ## Additional resources:
 
