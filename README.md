@@ -46,10 +46,14 @@ See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
 ## Additional resources:
 
-This configuration template is a good starting point for configuring NGINX securely, but it's not a silver bullet. You can find additional resources below to ensure your configuring NGINX properly.
+This configuration template is a good starting point for configuring NGINX securely, but it's not a silver bullet. You can find additional resources below to ensure NGINX is configured properly along with tools that give you extra hardening on top of NGINX.
 
-[**Yandex Gixy:**](https://github.com/yandex/gixy) Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box.
+[Yandex Gixy:](https://github.com/yandex/gixy) Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box.
 
-[**NGINX CIS Benchmark:**](https://www.cisecurity.org/benchmark/nginx) The CIS NGINX benchmark is a community compiled list of recommendations for a secure NGINX deployment, many of the recomendations are already applied here.
+[NGINX CIS Benchmark:](https://www.cisecurity.org/benchmark/nginx) The CIS NGINX benchmark is a community compiled list of recommendations for a secure NGINX deployment, many of the recomendations are already applied here.
 
-[**Pitfalls and Common Mistakes:**](https://web.archive.org/web/20220505132803/https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/) This NGINX blog post covers some common mistakes made by both new and inexperienced users, some of these are prevented by secure by default design.
+[Pitfalls and Common Mistakes:](https://web.archive.org/web/20220505132803/https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/) This NGINX blog post covers some common mistakes made by both new and inexperienced users, some of these are prevented by secure by default design.
+
+[ModSecurity WAF:](https://modsecurity.org) ModSecurity is an open source Web Application Firewall that can protect against a wide range of attacks, including the OWASP top 10, common misconfigurations, and data leakage. ModSecurity requires a ruleset to be effective, the most popular [one is OWASP CRS](https://coreruleset.org/).
+
+[CrowdSec:](https://www.crowdsec.net/) CrowdSec is an open source log analysis tool with Crowdsourced IP threat intelligence. It scans your logs for common indicators of attacks (i.e brute force attacks, multiple 404 errors, scanning for sensitive files, common exploits, etc), bans the offending IP address, and then shares that information with other CrowdSec users. All CrowdSec are given an free community IP blocklist that is powered from the signals of all CrowdSec users.
