@@ -3,21 +3,19 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 
 ## Features
 - HTTPs redirection
-- DoS mitigations (Rate limiting rules will need to be tuned to your needs)
-- Brotli Compression (Disabled by default)
-- Disable page indexing for Search Engines (Disabled by default)
-- 0-RTT (Disabled by default)
-- Hide NGINX and minimize information leakage via headers
 - HTTPs only mode with Strict Transport Security (Disabled by default)
-- Prevent host header spoofing
-- A/A+ Score on SSL Labs (A+ requires HTTPs only mode)
-- [Prevent DNS Spoofing](https://blog.zorinaq.com/nginx-resolver-vulns/)
-- Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
-- OCSP Stapling
-- File caching for frequently accessed files
+- Modern encryption with A/A+ on [ssllabs.com](https://www.ssllabs.com/)
+- Protections against common misconfigurations
 - Restrict access to sensitive files
-- Default empty webroot (Prevents accidentally exposing your entire server's file system to the internet)
 - Security header template (Get a higher score in https://securityheaders.com)
+- Prevent host header spoofing
+- DoS mitigations (Rate limiting rules will need to be tuned to your needs)
+- Hide NGINX and minimize information leakage via headers
+- Disable page indexing for Search Engines (Disabled by default)
+- Enhanced performance
+- Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
+- 0-RTT (Disabled by default)
+- Brotli Compression (Disabled by default)
 
 ## Requirements
 - A certificate with OCSP Stapling
@@ -27,9 +25,7 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 
 ## Before you install
 
-To prevent DNS spoofing, the resolver directive within the http block is set to use an localhost DNS stub resolver (which is 127.0.0.53 for most users, 127.0.0.11 for docker). DNS resolution will fail if your DNS stub resolver is not at 127.0.0.53, monitor your error.log file and update the `resolver` directive to use the correct IP address if your having issues.
-
-Don't set the resolver directive to a public DNS server, only use the localhost DNS resolver.
+NGINX can be vulnerable to DNS spoofing under specific conditions (Although rare), the resolver directive within the http block is set to use an localhost DNS stub resolver (which is 127.0.0.53 for most users, 127.0.0.11 for docker) to prevent this problem. DNS resolution will fail if your DNS stub resolver is not at 127.0.0.53, monitor your error.log file and update the `resolver` directive to use the correct IP address if your having issues.
 
 See: https://blog.zorinaq.com/nginx-resolver-vulns/
 
@@ -45,6 +41,8 @@ See: https://blog.zorinaq.com/nginx-resolver-vulns/
 8. Update `ssl_trusted_certificate` directive inside `nginx.conf` with the path to your certificate file for OCSP stapling. Please make sure your certificate supports OCSP stapling.
 9. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
 10. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
+
+Once you've finished the installation, please monitor your logs. Although this config is designed to be as painless as possible, there still is a possibility something might break.
 
 ## Additional resources:
 
