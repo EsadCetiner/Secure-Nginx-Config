@@ -18,7 +18,6 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 - Brotli Compression (Disabled by default)
 
 ## Requirements
-- A certificate with OCSP Stapling
 - ECC certificates are recommended, they are more secure and performant than RSA.
 - Nginx more_set_headers module installed
 - This has only been tested on Ubuntu/Debian so Ubuntu/Debian is recommended, although there is nothing stopping you from using this on Arch/Cent OS etc
@@ -32,17 +31,20 @@ See: https://blog.zorinaq.com/nginx-resolver-vulns/
 ## How to install
 
 1. It's recommended to start with an server without NGINX installed and without any NGINX related configuration.
-2. Then, install the following NGINX packages: `apt install nginx-common libnginx-mod-http-headers-more-filter ssl-cert git` this will install the bare minimum for NGINX to operate and has smallest possible attack surface out of the box. If you need to use additional NGINX modules then you should also install those also.
+2. Then, install the following NGINX packages: `apt install nginx-common libnginx-mod-http-headers-more-filter ssl-cert git` this will install the bare minimum for NGINX to operate and has smallest possible attack surface out of the box. If you need to install additional NGINX modules then make sure you keep those to a minimum.
 3. Clone this repository `git clone https://github.com/esadcetiner/secure-nginx-config/`.
 4. Replace the stock `nginx.conf` file with `cp secure-nginx-config/nginx.conf /etc/nginx/nginx.conf`.
 5. Move snippets to NGINX directory `cp -r secure-nginx-config/snippets/ /etc/nginx/`.
 6. Move error pages to webroot `cp -r secure-nginx-config/error_pages/ /var/www/`.
 7. Create an empty webroot `mkdir -p /var/www/empty-webroot/` (Never place anything in this directory).
-8. Update `ssl_trusted_certificate` directive inside `nginx.conf` with the path to your certificate file for OCSP stapling. Please make sure your certificate supports OCSP stapling.
-9. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
-10. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
+8. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
+9. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
 
 Once you've finished the installation, please monitor your logs. Although this config is designed to be as painless as possible, there still is a possibility something might break.
+
+### OCSP stapling
+
+A major certificate authority [Let's Encrypt is ending support for the OCSP protocol (And by extention OCSP stapling) on August 2025](https://letsencrypt.org/2024/12/05/ending-ocsp/) due to the operational costs associated with the protocol and poor adoption of OCSP stapling. It's likely that other certificate authorities will follow suit. OCSP stapling is no longer a requirement to use this template following this news, you can uncomment the OCSP stapling settings in `nginx.conf` if you still wish to use this feature.
 
 ## Additional resources:
 
