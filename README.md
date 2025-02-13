@@ -7,6 +7,8 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 - Modern encryption with A/A+ on [ssllabs.com](https://www.ssllabs.com/)
 - Protections against common misconfigurations
 - Restrict access to sensitive files
+- Clickjacking protection (Disabled by default)
+- XSS protection (Disabled by default)
 - Security header template (Get a higher score in https://securityheaders.com)
 - Prevent host header spoofing
 - DoS mitigations (Rate limiting rules will need to be tuned to your needs)

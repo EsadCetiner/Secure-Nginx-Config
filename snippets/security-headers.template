@@ -1,13 +1,13 @@
 # ----------------------------------------------------------------------------------------------
 # Secure Nginx Config
-# Copyright (c) 2022-2024 Esad Cetiner
+# Copyright (c) 2022-2025 Esad Cetiner
 #
 # This configuration template is distributed under GPLv2
 # Please see the included LICENSE file for full details
 # ----------------------------------------------------------------------------------------------
 
 # This is an example config on all of the security headers you should add to your application. All options here are
-# at the strictest possible value and is guaranteed to break your website. Your should copy paste these headers into
+# at the strictest possible value and is guaranteed to break your website. You should copy paste these headers into
 # your server block and then allow only exactly what you need. The browser console (Ctrl + Shift + i) is your best friend
 # when troubleshooting issues caused by security headers.
 
@@ -45,3 +45,10 @@ more_set_headers "Cross-Origin-Resource-Policy : same-origin";
 # WARNING: Some applications set their own CSP header, in this case you should not override it and let the application handle it.
 more_set_headers "Content-Security-Policy : default-src 'none'; script-src 'none'; style-src 'none; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; child-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests";
 
+# Tell all clients to only connect via HTTPS in the future for 2 years including all subdomains (defined in seconds).
+# This makes ssl-stripping attacks infeasible.
+# This header is essentially trust on first use, it does not apply on the first visit but it will on subsequent visits
+# unless preload is specified and you register your domain at https://hstspreload.org/.
+# CIS NGINX 4.1.8 v2.1.0
+# NOTE: Make sure this header is not sent over plaintext (port 80), it has no effect and is not RFC compliant.
+more_set_headers "Strict-Transport-Security : max-age=63072000; includeSubDomains; preload";

@@ -8,7 +8,7 @@ Brotli provides better compression rates than gzip with fewer CPU cycles, it's r
 
 NOTE: Brotli is not included in some distro's repositories (Ubuntu 22.04 does not have brotli but Ubuntu 24.04 does), you may have to use a 3rd party repo or compile it yourself.
 
-To activate this feature, Install the `libnginx-mod-http-brotli-filter` and `libnginx-mod-http-brotli-static` packages and uncomment the Brotli include line in `nginx.conf`.
+To activate this feature, Install the `libnginx-mod-http-brotli-filter` and `libnginx-mod-http-brotli-static` packages and uncomment the Brotli config under `Compression Settings - Brotli`
 
 `sudo apt install libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static`
 
@@ -30,17 +30,13 @@ You can use this snippet to prevent your admin panel or similar from being disco
 
 To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/no-robots.conf;`.
 
-## HTTPS only mode
-
-HTTPs only mode works by setting an security header to tell the client to only connect to this site via HTTPs in the future. It's strongly recommended to register your domain at https://hstspreload.org to ensure new visitors will always connect to your site via HTTPs. Be aware that this can break your site if HTTPs stops working, but it's strongly recommended to enable this feature.
-
-To activate this feature, add the following code within your NGINX server block `include /etc/nginx/snippets/ssl.conf;`, but only for port 443!
-
 ## Enable 0-RTT
 
 0-RTT is a feature introduced in TLSv1.3 to improve TLS's initial connection speed, this can have an especially big impact if combined with HTTP/3. This feature is disabled by default since it [opens up risks to replay attacks](https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/), you should consider the potential security impacts before enabling this.
 
-To activate this feature, uncomment the include in `nginx.conf`.
+To activate this feature, uncomment the two directives for 0-RTT under `Performance and Cache`
+
+**NOTE:** This option is not configureable per server block
 
 ## Protect sensitive files
 
@@ -54,4 +50,4 @@ Some clients such as smartphones do not support AES-NI and can have slow decrypt
 
 **WARNING:** This feature may not work depending on how NGINX is compiled, you might have to change your OpenSSL's config directly.
 
-To activate this feature, uncomment the include within `nginx.conf`.
+To activate this feature, uncomment the `ssl_conf_command` directive in `nginx.conf` under `TLS Settings`.
