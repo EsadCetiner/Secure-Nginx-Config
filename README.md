@@ -1,19 +1,19 @@
 # Fast and Secure NGINX Configuration Template - By Esad Cetiner
-This project's goal is to provide a fast and secure by default NGINX configuration template and encourage secure design that minimizes the chances of misconfigurations and their impacts. Code snippets are also provided for additional functionality for you to include in your server blocks.
+This project's goal is to provide a fast and secure by default NGINX configuration template and encourage secure design that minimizes the chances of misconfigurations and their impacts. Code snippets are also provided for additional functionality for you to include in your server blocks. Note that some features are disabled by default, you can enable them by uncommenting the relevant code in `nginx.conf`.
 
 ## Features
 - HTTPs redirection
 - HTTPs only mode with Strict Transport Security (Disabled by default)
 - Modern encryption with A/A+ on [ssllabs.com](https://www.ssllabs.com/)
+- A/A+ on [security-headers](https://securityheaders.com/) when using the [security header template file](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/security-headers.template)
 - Protections against common misconfigurations
-- Restrict access to sensitive files
+- [Restrict access to sensitive files](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/protect-sensitive-files.conf)
 - Clickjacking protection (Disabled by default)
 - XSS protection (Disabled by default)
-- Security header template (Get a higher score in https://securityheaders.com)
 - Prevent host header spoofing
 - DoS mitigations (Rate limiting rules will need to be tuned to your needs)
-- Hide NGINX and minimize information leakage via headers
-- Disable page indexing for Search Engines (Disabled by default)
+- [Hide NGINX](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/hide-nginx.conf) and minimize information leakage via headers
+- Disable page indexing for Search Engines ([Disabled by default](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/no-robots.conf))
 - Enhanced performance
 - Prioritize ChaCha20 encryption for clients that don't support AES-NI (Disabled by default)
 - 0-RTT (Disabled by default)
