@@ -39,8 +39,7 @@ See: https://blog.zorinaq.com/nginx-resolver-vulns/
 5. Move snippets to NGINX directory `cp -r secure-nginx-config/snippets/ /etc/nginx/`.
 6. Move error pages to webroot `cp -r secure-nginx-config/error_pages/ /var/www/`.
 7. Create an empty webroot `mkdir -p /var/www/empty-webroot/` (Never place anything in this directory).
-8. You should now be done now. Please [consult the documentation](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/docs.md) on information about the included snippets and additional features.
-9. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
+8. (Optional) If you need to enable Diffie-Helman Ephemeral for legacy clients, then you must generate an Diffie-Helamn parameters file(`openssl dhparam -out /etc/ssl/dhparams-4096.pem 4096`) and uncomment the `ssl_dhparam` directive in `nginx.conf` to [avoid logjam](https://weakdh.org/sysadmin.html). Only ECDHE is enabled for key exchange by default for better performance and security.
 
 Once you've finished the installation, please monitor your logs. Although this config is designed to be as painless as possible, there still is a possibility something might break.
 
