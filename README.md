@@ -51,7 +51,7 @@ A major certificate authority [Let's Encrypt is ending support for the OCSP prot
 
 This configuration template is a good starting point for configuring NGINX securely, but it's not a silver bullet. You can find additional resources below to ensure NGINX is configured properly along with tools that give you extra hardening on top of NGINX.
 
-[Yandex Gixy:](https://github.com/yandex/gixy) Yandex Gixy is a static analysis tool for Nginx, it can detect misconfigurations like HTTP splitting, host header spoofing and SSRF. This project passes all tests from gixy out of the box.
+[Gixy-Next:](https://github.com/MegaManSec/Gixy-Next) is a fork of [Yandex Gixy](https://github.com/yandex/gixy), which is a static analysis tool for NGINX. It can detect common misconfigurations such as HTTP splitting, Host header spoofing, SSRF, and Directory Traversal. Yandex Gixy is currently unmaintained, Gixy-Next is actively maintained and has more functionality than Yandex Gixy.
 
 [NGINX CIS Benchmark:](https://www.cisecurity.org/benchmark/nginx) The CIS NGINX benchmark is a community compiled list of recommendations for a secure NGINX deployment, many of the recomendations are already applied here.
 
