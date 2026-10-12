@@ -1,33 +1,30 @@
 # ----------------------------------------------------------------------------------------------
 # Secure Nginx Config
-# Copyright (c) 2022-2025 Esad Cetiner
+# Copyright (c) 2022-2026 Esad Cetiner
 #
 # This configuration template is distributed under GPLv2
 # Please see the included LICENSE file for full details
 # ----------------------------------------------------------------------------------------------
 
-# This is an example config on all of the security headers you should add to your application. All options here are
-# at the strictest possible value and is guaranteed to break your website. You should copy paste these headers into
-# your server block and then allow only exactly what you need. The browser console (Ctrl + Shift + i) is your best friend
+# Provides an example of all the security headers that you may need to add at their strictest possible values.
+# It's recommened to add all these headers, then allow exactly what you need.
+# WARNING: The values provided here are guaranteed to break stuff, The browser console (Ctrl + Shift + i) is your best friend
 # when troubleshooting issues caused by security headers.
 
-# Once your done tuning these headers, check your work against a website like https://securityheaders.com.
-# It's not always possible to get an A+ with this tool, but it's a good place to check over your work.
+# Once your done tuning these headers, you can use https://securityheaders.com to check over your work.
 
-# Prevent clickjacking by restricting iFrames
+# Prevents clickjacking attacks
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 # CIS NGINX 5.3.1 v2.1.0
 more_set_headers "X-Frame-Options : DENY";
 
-# Remove the referer header
+# Prevents information leakage via the referrer header.
 # CIS NGINX 5.3.4 v2.1.0
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
 more_set_headers "Referrer-Policy : no-referrer";
 
-# Disable access to microphone, camera, etc by default
-# There are tons of options here I suggest using this site to create your
-# permission policy header instead of editing this manually.
-# See: https://www.permissionspolicy.com/
+# Restricts access to permissions such as microphone and camera.
+# I suggest using this tool to generate a policy: https://www.permissionspolicy.com/
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
 more_set_headers "Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()";
 
@@ -37,18 +34,17 @@ more_set_headers "Cross-Origin-Embedder-Policy : require-corp";
 more_set_headers "Cross-Origin-Opener-Policy : same-origin";
 more_set_headers "Cross-Origin-Resource-Policy : same-origin";
 
-# CSP is an powerful header for preventing XSS attacks, iFrames and in general preventing unauthorized resources from loading.
-# There are a ton of options here and a ton of values here, it's recommened to familiarize yourself with many of the options
-# available within the CSP header.
+# Prevents XSS, clickjacking, and unauthorized resources from loading. 
 # CIS NGINX 5.3.3 v2.1.0
 # See: https://content-security-policy.com/
 # WARNING: Some applications set their own CSP header, in this case you should not override it and let the application handle it.
 more_set_headers "Content-Security-Policy : default-src 'none'; script-src 'none'; style-src 'none; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; child-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests";
 
-# Tell all clients to only connect via HTTPS in the future for 2 years including all subdomains (defined in seconds).
-# This makes ssl-stripping attacks infeasible.
-# This header is essentially trust on first use, it does not apply on the first visit but it will on subsequent visits
-# unless preload is specified and you register your domain at https://hstspreload.org/.
+# Tells all clients to in the future to only connect via HTTPs for 2 years (The highest possible value) to prevent
+# ssl stripping attacks. You should also pre-load your domain at https://hstspreload.org/ force future browser versions
+# to only connect to your domain via HTTPs.
 # CIS NGINX 4.1.8 v2.1.0
-# NOTE: Make sure this header is not sent over plaintext (port 80), it has no effect and is not RFC compliant.
+# NOTE: Don't send this header over plain text (port 80), it has no effect and is not RFC compliant.
+# WARNING: HTTPs should be working reliably before you enable this option, however nower days there's no excuse
+# for not having proper HTTPs support.
 more_set_headers "Strict-Transport-Security : max-age=63072000; includeSubDomains; preload";
