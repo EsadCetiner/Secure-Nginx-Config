@@ -10,7 +10,6 @@ This configuration template aims to be a baseline for building a secure and perf
 - Post-Quantum Cryptography
 - A/A+ on [security-headers](https://securityheaders.com/) when using the [security header template file](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/security-headers.template)
 - Protections against common misconfigurations
-- [Restrict access to sensitive files](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/protect-sensitive-files.conf)
 - Clickjacking protection (Disabled by default)
 - XSS protection (Disabled by default)
 - Prevent host header spoofing
