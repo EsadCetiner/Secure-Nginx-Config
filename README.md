@@ -5,6 +5,7 @@ This project's goal is to provide a fast and secure by default NGINX configurati
 - HTTPs redirection
 - HTTPs only mode with Strict Transport Security (Disabled by default)
 - Modern encryption with A/A+ on [ssllabs.com](https://www.ssllabs.com/)
+- Support for Post-Quantum Cryptography
 - A/A+ on [security-headers](https://securityheaders.com/) when using the [security header template file](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/security-headers.template)
 - Protections against common misconfigurations
 - [Restrict access to sensitive files](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/snippets/protect-sensitive-files.conf)
